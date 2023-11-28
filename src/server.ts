@@ -7,3 +7,11 @@ const typeDefs = gql`
     info: String!
   }
 `;
+
+// リゾルバ関数
+// 型に対して、何かの値を返す関数(入れてあげる)
+const resolvers = {
+  Query: {
+    info: () => `HackerNewsクローン`
+  },
+};
