@@ -22,7 +22,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    post(url: String!, description: Sting!): Link!
+    post(url: String!, description: String!): Link!
   }
 
   type Link {

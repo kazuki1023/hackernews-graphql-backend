@@ -1,6 +1,5 @@
 "use strict";
 const { ApolloServer, gql } = require('apollo-server');
-// hackerNEwsの１つ１つの投稿
 let links = [
     {
         id: "link-0",
@@ -16,6 +15,10 @@ const typeDefs = gql `
     feed: [Link]!
   }
 
+  type Mutation {
+    post(url: String!, description: String!): Link!
+  }
+
   type Link {
     id: ID!
     description: String!
@@ -29,6 +32,18 @@ const resolvers = {
         info: () => `HackerNewsクローン`,
         feed: () => links,
     },
+    Mutation: {
+        post: (parent, args) => {
+            let idCount = links.length;
+            const link = {
+                id: `link-${idCount++}`,
+                description: args.description,
+                url: args.url
+            };
+            links.push(link);
+            return link;
+        }
+    }
 };
 const server = new ApolloServer({
     typeDefs,
