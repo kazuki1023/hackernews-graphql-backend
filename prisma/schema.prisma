@@ -1,0 +1,21 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// prismaのclient生成用
+// dbのモデルに応じて作られる
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// @で条件
+model Link {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  description String
+  url String
+}
