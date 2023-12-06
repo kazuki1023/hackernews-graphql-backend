@@ -21,6 +21,10 @@ const typeDefs = gql`
     feed: [Link]!
   }
 
+  type Mutation {
+    post(url: String!, description: Sting!): Link!
+  }
+
   type Link {
     id: ID!
     description: String!
@@ -35,6 +39,21 @@ const resolvers = {
     info: () => `HackerNewsクローン`,
     feed: () => links,
   },
+
+  Mutation: {
+    post: (parent: any, args: Link) => {
+      let idCount = links.length;
+
+      const link = {
+        id: `link-${idCount++}`,
+        description: args.description,
+        url: args.url
+      };
+
+      links.push(link);
+      return link
+    }
+  }
 };
 
 const server = new ApolloServer({
