@@ -27,3 +27,8 @@ node ./src/server.js
   - RDBはSQLiteとかposgresql,mysql
 
 ![参考](./public/img/スクリーンショット%202023-12-06%209.30.21.png)
+
+### migrationコマンド
+```
+npx prisma migrate dev
+```
