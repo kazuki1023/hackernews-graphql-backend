@@ -17,7 +17,7 @@ async function main() {
 main()
 .catch((e: unknown) => {
   throw e;
-})
+})            
 .finally(async () =>{
   // データベースを閉じる
   prisma.$disconnect();
