@@ -5,28 +5,19 @@ const path = require("path");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+const Query = require("./resolvers/Query");
+const Mutation = require("./resolvers/Mutation");
+const User = require("./resolvers/User");
+const Link = require("./resolvers/Link");
+
 
 // リゾルバ関数
 // 型に対して、何かの値を返す関数(入れてあげる)
 const resolvers = {
-  Query: {
-    info: () => `HackerNewsクローン`,
-    feed: () => async (parent: any, args: any, context: any) => {
-      return context.prisma.link.findMany();
-    },
-  },
-
-  Mutation: {
-    post: (parent: any, args: any, context: any) => {
-      const newLink = context.prisma.link.create({
-        data: {
-          url: args.url,
-          description: args.description,
-        }
-      });
-      return newLink;
-    }
-  }
+  Query,
+  Mutation,
+  User,
+  Link,
 };
 
 // contextを設定してあげることで、リゾルバ関数の中でprismaを使えるようになる
