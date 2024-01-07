@@ -29,12 +29,16 @@ const resolvers = {
   }
 };
 
-// contextを設定してあげることで、リゾルバ関数の中でcontextを使えるようになる
+// contextを設定してあげることで、リゾルバ関数の中でprismaを使えるようになる
 const server = new ApolloServer({
   typeDefs: fs.readFileSync(path.join(__dirname, "schema.graphql"), "utf-8"),
   resolvers,
-  context: {
-    prisma,
+  context: ({ req }: { req: any }) => {
+    return {
+      ...req,
+      prisma,
+      userId: req && req.headers.authenticated ? getUserId(req) : null,
+    };
   }
 });
 
